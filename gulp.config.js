@@ -1,6 +1,6 @@
 module.exports = {
 
-  // gulp globbing patterns
+  // globbing patterns
   globs: {
     alljs: ['./src/**/*.js', '!./node_modules/'],
     allcss: './src/css/**/*.css',

@@ -37,7 +37,7 @@ function bundle () {
 
   var bundleStream = b.bundle()
   return bundleStream
-    .on('error', logError)
+    .on('error', logErrors)
     .pipe(source('main.js'))
     .pipe(buffer())
     // load maps from browserify, thanks to 'debug: true'
@@ -73,11 +73,21 @@ gulp.task('compressHTML', function () {
 }
 )
 
+/**
+ * Image compression
+ * I'm using lossy compression: reduce the quality of the image to 65
+ * and also i'm using lossless compression which reduce all
+ * meta data ...
+ */
 gulp.task('compressImages', function (done) {
   return gulp
     .src(config.globs.allimgs)
     .pipe($.imagemin({optimizationLevel: 7}))
     .pipe(gulp.dest('./build/imgs/'))
+})
+
+gulp.task('lossyCompression', function (done) {
+  done()
 })
 
 gulp.task('buildWithRev', function () {
@@ -153,7 +163,7 @@ function log (msg) {
  * pop a bubble including the error line and the file name
  * @param  {object} err the error object that will be logged
  */
-function logError (err) {
+function logErrors (err) {
   var lineNumber = err.loc.line
   var fileName = getFileName(err.filename)
 

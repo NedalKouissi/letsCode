@@ -8,6 +8,7 @@ var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
 var babelify = require('babelify')
 var del = require('del')
+var tapColorize = require('tap-colorize');
 var $ = require('gulp-load-plugins')({
   lazy: true,
   rename: {
@@ -46,6 +47,12 @@ function bundle () {
     .pipe(gulp.dest('./src/js/'))
     .pipe(browserSync.reload({stream: true}))
 }
+
+gulp.task('testjs', function () {
+  return gulp
+  .src(config.globs.tests)
+  .pipe($.tape({reporter: tapColorize()}))
+})
 
 /**
  * @task {build} Ship the source code into build

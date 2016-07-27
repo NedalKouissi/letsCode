@@ -3,6 +3,7 @@ module.exports = {
   // globbing patterns
   globs: {
     alljs: ['./src/**/*.js', '!./node_modules/'],
+    tests: ['./test/*.js'],
     allcss: './src/css/**/*.css',
     allhtml: './src/*.html',
     mainjs: './src/js/app.js',

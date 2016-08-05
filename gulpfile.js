@@ -8,7 +8,8 @@ var source = require('vinyl-source-stream')
 var buffer = require('vinyl-buffer')
 var babelify = require('babelify')
 var del = require('del')
-var tapColorize = require('tap-colorize');
+var tapColorize = require('tap-colorize')
+var isparta = require('isparta')
 var $ = require('gulp-load-plugins')({
   lazy: true,
   rename: {
@@ -48,11 +49,22 @@ function bundle () {
     .pipe(browserSync.reload({stream: true}))
 }
 
-gulp.task('testjs', function () {
+gulp.task('pre-test', function () {
   return gulp
-  .src(config.globs.tests)
-  .pipe($.tape({reporter: tapColorize()}))
+    .src(config.globs.alljs)
+    .pipe($.istanbul({instrumenter: isparta.Instrumenter}))
+    .pipe($.istanbul.hookRequire())
 })
+
+gulp.task('test', function () {
+  return gulp
+    .src(config.globs.tests)
+    .pipe($.tape({reporter: tapColorize()}))
+    .pipe($.istanbul.writeReports())
+    .pipe($.istanbul.enforceThresholds({ thresholds: { global: 90 } }))
+})
+
+gulp.task('testjs', gulp.series('pre-test', 'test'))
 
 /**
  * @task {build} Ship the source code into build

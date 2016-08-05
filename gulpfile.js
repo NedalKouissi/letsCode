@@ -64,7 +64,7 @@ gulp.task('test', function () {
     .pipe($.istanbul.enforceThresholds({ thresholds: { global: 90 } }))
 })
 
-gulp.task('testjs', gulp.series('pre-test', 'test'))
+gulp.task('default', gulp.series('pre-test', 'test'))
 /**
  * @task {build} Ship the source code into build
  */

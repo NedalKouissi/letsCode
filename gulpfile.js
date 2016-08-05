@@ -65,7 +65,6 @@ gulp.task('test', function () {
 })
 
 gulp.task('testjs', gulp.series('pre-test', 'test'))
-
 /**
  * @task {build} Ship the source code into build
  */

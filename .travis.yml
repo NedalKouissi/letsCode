@@ -9,3 +9,11 @@ node_js:
 before_script:
   - npm install -g gulp
 script: gulp
+
+addons:
+  sauce_connect: true
+
+addons:
+  sauce_connect:
+    username: "iddsfn"
+    access_key: "f9230436-fbf8-4eac-96f6-7b136c445382"

@@ -51,8 +51,11 @@ function bundle () {
 
 gulp.task('pre-test', function () {
   return gulp
-    .src(config.globs.alljs)
-    .pipe($.istanbul({instrumenter: isparta.Instrumenter}))
+    .src(config.globs.testjs)
+    .pipe($.istanbul({
+      instrumenter: isparta.Instrumenter,
+      includeUntested: true
+    }))
     .pipe($.istanbul.hookRequire())
 })
 
@@ -61,10 +64,10 @@ gulp.task('test', function () {
     .src(config.globs.tests)
     .pipe($.tape({reporter: tapColorize()}))
     .pipe($.istanbul.writeReports())
-    .pipe($.istanbul.enforceThresholds({ thresholds: { global: 90 } }))
+    .pipe($.istanbul.enforceThresholds({thresholds: { global: 90 }}))
 })
 
-gulp.task('default', gulp.series('pre-test', 'test'))
+gulp.task('testjs', gulp.series('pre-test', 'test'))
 /**
  * @task {build} Ship the source code into build
  */

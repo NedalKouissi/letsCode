@@ -8,10 +8,7 @@ node_js:
 
 before_script:
   - npm install -g gulp
-script: gulp
-
-addons:
-  sauce_connect: true
+script: npm run ci
 
 addons:
   sauce_connect:

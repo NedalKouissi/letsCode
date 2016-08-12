@@ -4,7 +4,7 @@ module.exports = {
   globs: {
     alljs: ['./src/**/*.js', '!./node_modules/'],
     testjs: ['./src/**/*.js', '!./node_modules/', '!./src/js/main.js'],
-    tests: ['./test/*.js'],
+    tests: ['./test/**/*.js'],
     allcss: './src/css/**/*.css',
     allhtml: './src/*.html',
     mainjs: './src/js/app.js',

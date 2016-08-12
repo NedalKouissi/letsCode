@@ -50,6 +50,6 @@
   "standard": {
     "parser": "babel-eslint"
   },
-  "author": "",
+  "author": "Nedal Kouissi",
   "license": "ISC"
 }
